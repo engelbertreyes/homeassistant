@@ -1,6 +1,10 @@
+# To use this automation first Broadlink remote device must be configured to create send and learn
+# commands for the devices to be controlled.
+# Then, virtual light must be created to be able to control the Mini Split unit using light brightness
+# Finally, I used custom slider button card from HACS to improve the usability.
 - id: '1632160553158'
   alias: Master Bedroom - AC
-  description: ''
+  description: 'This automation uses Broadlink integration and HACS Virtual elements'
   trigger:
   - platform: numeric_state
     entity_id: light.virtual_main_room_air_conditioner
