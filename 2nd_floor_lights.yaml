@@ -1,0 +1,75 @@
+alias: (YAML) 2nd Floor - Lights - Button and automatic lights
+description: ''
+trigger:
+  - platform: state
+    entity_id: switch.2nd_floor_living_room_and_hallway_bottom
+    id: button_off
+    from: 'on'
+    to: 'off'
+  - platform: state
+    entity_id: switch.2nd_floor_living_room_and_hallway_bottom
+    id: button_on
+    from: 'off'
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.motion_2nd_floor_living_room_occupancy
+    id: motion_stopped
+    to: 'off'
+  - platform: event
+    event_type: timer.finished
+    id: timer_finished
+    event_data:
+      entity_id: timer.living_room_motion
+  - platform: state
+    entity_id: binary_sensor.motion_2nd_floor_living_room_occupancy
+    id: motion_detected
+    to: 'on'
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: button_off
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: light.2nd_floor_lights
+      - conditions:
+          - condition: trigger
+            id: button_on
+        sequence:
+          - service: light.turn_on
+            target:
+              entity_id: light.2nd_floor_lights
+      - conditions:
+          - condition: trigger
+            id: motion_stopped
+        sequence:
+          - service: timer.start
+            target:
+              entity_id: timer.living_room_motion
+            data:
+              duration: '0'
+      - conditions:
+          - condition: trigger
+            id: timer_finished
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id:
+                - light.2nd_floor_lights
+      - conditions:
+          - condition: trigger
+            id: motion_detected
+          - condition: numeric_state
+            entity_id: sensor.motion_2nd_floor_living_room_illuminance_lux
+            below: '200'
+        sequence:
+          - service: timer.cancel
+            target:
+              entity_id: timer.living_room_motion
+          - service: light.turn_on
+            target:
+              entity_id: light.2nd_floor_lights
+    default: []
+mode: single
