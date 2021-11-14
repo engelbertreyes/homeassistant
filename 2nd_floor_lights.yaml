@@ -1,5 +1,6 @@
-alias: (YAML) 2nd Floor - Lights - Button and automatic lights
-description: ''
+id: c9e25713-a224-43dd-98d5-733b7c85b3de
+alias: (YAML) 2nd Floor - Lights - Button and automatic lights with night light
+description: Updated version that turns only the lamp if on Night Mode
 trigger:
   - platform: state
     entity_id: switch.2nd_floor_living_room_and_hallway_bottom
@@ -58,6 +59,19 @@ action:
             target:
               entity_id:
                 - light.2nd_floor_lights
+      - conditions:
+          - condition: trigger
+            id: motion_detected
+          - condition: state
+            entity_id: input_boolean.night_mode
+            state: 'on'
+        sequence:
+          - service: timer.cancel
+            target:
+              entity_id: timer.living_room_motion
+          - service: light.turn_on
+            target:
+              entity_id: light.2nd_floor_living_room_decorative_lamps
       - conditions:
           - condition: trigger
             id: motion_detected
