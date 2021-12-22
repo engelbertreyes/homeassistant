@@ -1,0 +1,10 @@
+platform: virtual
+name: 'main room air conditioner'
+initial_value: 'on'
+initial_brightness: 100
+support_color: true
+initial_color: [240,76.7]
+support_color_temp: true
+initial_color_temp: 255
+support_white_value: true
+initial_white_value: 240

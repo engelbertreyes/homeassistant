@@ -1,0 +1,20 @@
+#####
+# List of lights in specific area
+#####
+
+platform: group
+name: All Bedrooms Lights
+entities:
+  - light.master_bedroom_engelbert_s_spotlights
+  - light.master_bedroom_led_strip
+  - light.master_bedroom_main_lights
+  - light.master_bedroom_yini_s_spotlights
+  - light.master_bedroom_engelbert_s_bedlamp
+  - light.master_bedroom_yini_s_bedlamp
+  - light.david_s_bedroom_led_strip
+  - light.david_s_bedroom_spotlights
+  - light.gabriela_s_bedroom_led_strip
+  - light.gabriela_s_bedroom_spotlights
+  - light.sofia_s_bedroom_led_strip
+  - light.sofia_s_bedroom_main_lights
+  - light.basement_guest_room

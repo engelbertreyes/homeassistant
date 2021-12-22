@@ -1,0 +1,8 @@
+exterior:
+  name: Exterior Lights and lights that turn on at night
+  all: true
+  entities:
+  - light.garage
+  - light.balcony
+  - light.2nd_floor_living_room_decorative_lamps
+  - light.garden

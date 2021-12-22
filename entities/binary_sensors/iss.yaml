@@ -1,0 +1,6 @@
+#####
+# Load ISS component and get location
+# https://www.home-assistant.io/integrations/iss/
+#####
+
+platform: iss

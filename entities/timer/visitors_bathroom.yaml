@@ -1,0 +1,9 @@
+#####
+# Timer for Visitor's Bathroom lights
+# 
+#####
+
+visitors_bathroom:
+  duration: '00:10:00'
+  name: Visitor's Bathroom Timer
+  icon: mdi:timer-outline

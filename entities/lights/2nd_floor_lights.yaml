@@ -1,0 +1,11 @@
+#####
+# List of lights in specific area
+#####
+
+platform: group
+name: 2nd Floor Lights
+entities:
+  - light.2nd_floor_spotlight
+  - light.2nd_floor_lamp
+  - light.2nd_floor_living_room_decorative_lamps
+  - light.2nd_floor_led

@@ -1,0 +1,13 @@
+#####
+# Counts the amount of time the Main AC has been ON for the past 7 days
+# https://www.home-assistant.io/integrations/history_stats/
+#####
+
+platform: history_stats
+name: Main AC on
+entity_id: light.virtual_main_room_air_conditioner
+state: 'on'
+type: time
+end: '{{ now() }}'
+duration:
+  days: 7

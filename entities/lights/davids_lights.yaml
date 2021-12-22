@@ -1,0 +1,11 @@
+#####
+# List of lights in specific area
+#####
+
+platform: group
+name: David Room and Bathroom Lights
+entities:
+  - light.david_s_bathroom_led_strip
+  - light.david_s_bathroom_spotlights
+  - light.david_s_bedroom_led_strip
+  - light.david_s_bedroom_spotlights

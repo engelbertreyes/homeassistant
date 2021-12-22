@@ -1,0 +1,9 @@
+#####
+# Timer for Bathroom lights automation
+# 
+#####
+
+bathroom_motion:
+  duration: '00:10:00'
+  name: Bathroom Motion Timer
+  icon: mdi:timer-outline

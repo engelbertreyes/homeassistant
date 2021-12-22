@@ -1,0 +1,19 @@
+#####
+# List of lights in specific area
+#####
+
+platform: group
+name: All Bathroom and Dresser Lights
+entities:
+  - light.yini_s_dressing_room_lamp
+  - light.yini_s_dressing_room_lights
+  - light.engelbert_s_dressing_room
+  - light.main_bathroom_led
+  - light.main_bathroom_spotlights
+  - light.girls_bathroom_led_strip
+  - light.girls_bathroom_lights
+  - light.david_s_bathroom_led_strip
+  - light.david_s_bathroom_spotlights
+  - light.visitor_bathroom_lights
+  - light.visitors_bathroom_lamp
+  - light.basement_bathroom

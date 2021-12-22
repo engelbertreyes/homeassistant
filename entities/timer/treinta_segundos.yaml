@@ -1,0 +1,9 @@
+#####
+# Timer thirty seconds.
+# Still not used, maybe will use it for time to check something periodically
+#####
+
+treinta_segundos:
+  duration: '00:00:30'
+  name: Thirty Seconds Timer
+  icon: mdi:timer-outline

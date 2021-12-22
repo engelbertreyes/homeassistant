@@ -1,0 +1,9 @@
+#####
+# List of lights in specific area
+#####
+
+platform: group
+name: visitor bathroom lights
+entities:
+  - light.visitors_bathroom_lamp
+  - light.visitors_bathroom_main_light

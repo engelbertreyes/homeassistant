@@ -1,0 +1,11 @@
+#####
+# List of lights in specific area
+#####
+
+platform: group
+name: Exterior Lights
+entities:
+  - light.garage
+  - light.balcony
+  - light.2nd_floor_living_room_decorative_lamps
+  - light.garden

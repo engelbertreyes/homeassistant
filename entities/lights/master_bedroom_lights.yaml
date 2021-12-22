@@ -1,0 +1,13 @@
+#####
+# List of lights in specific area
+#####
+
+platform: group
+name: Main Room Lights
+entities:
+  - light.master_bedroom_engelbert_s_spotlights
+  - light.master_bedroom_led_strip
+  - light.master_bedroom_main_lights
+  - light.master_bedroom_yini_s_spotlights
+  - light.master_bedroom_engelbert_s_bedlamp
+  - light.master_bedroom_yini_s_bedlamp

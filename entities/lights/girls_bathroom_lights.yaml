@@ -1,0 +1,10 @@
+
+#####
+# List of lights in specific area
+#####
+
+platform: group
+name: Girls Bathroom Lights
+entities:
+  - light.girls_bathroom_main_lights
+  - light.girls_bathroom_led_strip

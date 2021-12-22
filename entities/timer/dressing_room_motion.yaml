@@ -1,0 +1,9 @@
+#####
+# Timer for Dressing room automation
+# 
+#####
+
+dressing_room_motion:
+  duration: '00:05:00'
+  name: Engelbert's Dressing Room Motion Timer
+  icon: mdi:timer-outline

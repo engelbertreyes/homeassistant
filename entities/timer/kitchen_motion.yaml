@@ -1,0 +1,9 @@
+#####
+# Timer for Kitchen future automation
+# 
+#####
+
+kitchen_motion:
+  duration: '00:05:00'
+  name: Kitchen Motion Timer
+  icon: mdi:timer-outline

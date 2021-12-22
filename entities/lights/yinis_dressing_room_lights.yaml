@@ -1,0 +1,9 @@
+#####
+# List of lights in specific area
+#####
+
+platform: group
+name: Yini's Dressing Room Lights
+entities:
+      - light.yini_s_dressing_room_lamp
+      - light.yini_s_dressing_room_spotlight

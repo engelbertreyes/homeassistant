@@ -1,0 +1,10 @@
+#####
+# List of lights in specific area
+#####
+
+platform: group
+name: Bathroom and Dresser Lights
+entities:
+  - light.engelbert_s_dressing_room
+  - light.main_bathroom_led
+  - light.main_bathroom_spotlights

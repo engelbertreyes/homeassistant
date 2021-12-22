@@ -1,0 +1,28 @@
+#####
+# List of lights in specific area
+#####
+
+platform: group
+name: Common Area Lights
+entities:
+  - light.hallway_spotlights
+  - light.dining_room_lamp
+  - light.dining_room_led
+  - light.dining_room_spotlight
+  - light.1st_floor_hallway_left_led_strip
+  - light.1st_floor_hallway_right_led_strip
+  - light.1st_floor_spotlights
+  - light.kitchen_spotlights
+  - light.kitchen_lamp
+  - light.kitchen_main_lights
+  - light.reading_room_led_strip
+  - light.reading_room_spotlights
+  - light.reading_room_universe_lamps
+  - light.2nd_floor_spotlight
+  - light.2nd_floor_lamp
+  - light.2nd_floor_living_room_decorative_lamps
+  - light.2nd_floor_led
+  - light.stairs
+  - light.wine_cellar
+  - light.pantry
+  - light.basement_stairs

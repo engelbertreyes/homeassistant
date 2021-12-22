@@ -1,0 +1,9 @@
+#####
+# Timer for Stairs lights automation
+# 
+#####
+
+stairs:
+  duration: '00:05:00'
+  name: Stairs Motion Timer
+  icon: mdi:timer-outline

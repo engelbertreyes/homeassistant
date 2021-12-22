@@ -1,0 +1,9 @@
+# This sensor is used to fill the upcoming media card custom component
+
+platform: sonarr_upcoming_media
+api_key: !secret sonarr_api
+host: !secret server_ip
+port: 8989
+days: 7
+ssl: false
+max: 10

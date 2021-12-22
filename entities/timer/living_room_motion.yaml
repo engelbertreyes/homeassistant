@@ -1,0 +1,9 @@
+#####
+# Timer for 2nd floor lights
+# 
+#####
+
+living_room_motion:
+  duration: '00:05:00'
+  name: Living Room Motion Timer
+  icon: mdi:timer-outline

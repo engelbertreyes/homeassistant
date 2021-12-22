@@ -1,0 +1,9 @@
+#####
+# Timer for Yini's Dressing room lights
+# 
+#####
+
+yini_s_dressing_room_motion:
+  duration: '00:15:00'
+  name: Yini's Dressing Room Timer
+  icon: mdi:timer-outline

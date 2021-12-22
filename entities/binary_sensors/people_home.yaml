@@ -1,0 +1,15 @@
+#####
+# Set People Home to "Home" if anyone is home
+# 
+#####
+
+platform: template
+sensors:
+  people_home:
+    value_template: >-
+      {{ is_state('person.alexandra', 'home')
+         or is_state('person.david_armando', 'home')
+         or is_state('person.engelbert_reyes', 'home')
+         or is_state('person.gabriela', 'home')
+         or is_state('person.sofia', 'home')
+         or is_state('person.yini_datt', 'home') }}

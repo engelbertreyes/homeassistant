@@ -1,0 +1,9 @@
+#####
+# Sending TTS to Alexa del bano
+#
+#####
+
+platform: tts
+name: on_the_bathroom
+tts_service: tts.google_translate_say
+media_player: media_player.bano
