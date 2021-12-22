@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: dryer
+entity_id: switch.washing_area_bottom

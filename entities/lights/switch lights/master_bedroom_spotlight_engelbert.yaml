@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: Master Bedroom Engelbert's Spotlights
+entity_id: switch.master_bedroom_left_side_center

@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: David's Bathroom LED strip
+entity_id: switch.david_s_bathroom_top

@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: reading room universe lamps
+entity_id: switch.reading_room_top

@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: garage
+entity_id: switch.kitchen_to_the_basement_bottom

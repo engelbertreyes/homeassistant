@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: Basement Bathroom
+entity_id: switch.basement_bathroom_top

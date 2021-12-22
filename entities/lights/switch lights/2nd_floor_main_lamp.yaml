@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: 2nd floor lamp
+entity_id: switch.stairs_left_top

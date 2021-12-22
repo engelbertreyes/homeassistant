@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: Master Bedroom Main Lights
+entity_id: switch.master_bedroom_right_side_center

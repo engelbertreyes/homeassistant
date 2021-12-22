@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: engelbert's dressing room
+entity_id: switch.engelbert_s_dressing_room_top

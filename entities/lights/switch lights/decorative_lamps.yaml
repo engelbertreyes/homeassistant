@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: 2nd floor living room decorative lamps
+entity_id: switch.2nd_floor_living_room_and_hallway_top

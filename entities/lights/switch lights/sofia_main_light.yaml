@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: Sofia's Bedroom Main Lights
+entity_id: switch.sofia_s_bedroom_center

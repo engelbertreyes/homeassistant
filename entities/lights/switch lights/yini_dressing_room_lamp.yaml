@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: yini's dressing room lamp
+entity_id: switch.yini_s_dressing_room_bottom

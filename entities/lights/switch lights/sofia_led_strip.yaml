@@ -1,0 +1,6 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: Sofia's Bedroom LED strip
+entity_id: switch.sofia_s_bedroom_bottom
+

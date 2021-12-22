@@ -1,0 +1,7 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: 1st floor hallway left led strip
+entity_id: switch.1st_foor_hallway_bottom
+
+

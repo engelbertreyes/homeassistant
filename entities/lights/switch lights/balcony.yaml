@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: Balcony
+entity_id: switch.balcony_top

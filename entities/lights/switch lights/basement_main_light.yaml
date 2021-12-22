@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: Basement Main Light
+entity_id: switch.basement_main_light_top

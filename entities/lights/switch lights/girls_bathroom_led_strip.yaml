@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: Girls Bathroom LED strip
+entity_id: switch.girls_bathroom_sofia_s_side_bottom

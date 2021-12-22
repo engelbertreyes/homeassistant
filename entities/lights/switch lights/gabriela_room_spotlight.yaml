@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: Gabriela's Bedroom spotlights
+entity_id: switch.gabriela_s_bedroom_center

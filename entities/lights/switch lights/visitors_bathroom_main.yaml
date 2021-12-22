@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: Visitors Bathroom Main Light
+entity_id: switch.visitors_bathroom_center

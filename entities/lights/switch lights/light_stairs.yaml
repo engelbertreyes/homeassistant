@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: stairs
+entity_id: switch.stairs_right_top

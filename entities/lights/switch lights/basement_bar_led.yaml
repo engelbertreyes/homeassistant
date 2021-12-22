@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: Basement Bar LED
+entity_id: switch.basement_bar_center

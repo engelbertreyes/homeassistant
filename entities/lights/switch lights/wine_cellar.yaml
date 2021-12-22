@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: Wine Cellar
+entity_id: switch.wine_cellar_top

@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: Master Bedroom Yini's bedlamp
+entity_id: switch.master_bedroom_bedroom_lamps_center

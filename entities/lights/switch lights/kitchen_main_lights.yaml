@@ -1,0 +1,5 @@
+#  Creates a Light from Switch
+
+platform: switch
+name: Kitchen Main Lights
+entity_id: switch.kitchen_entry_center
