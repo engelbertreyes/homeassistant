@@ -1,0 +1,9 @@
+#####
+# Configures the official Home Assistant frontend.
+#
+# https://www.home-assistant.io/components/frontend/
+#####
+
+frontend:
+#  javascript_version: latest  <---- Deprecated
+  themes: !include_dir_merge_named ../themes

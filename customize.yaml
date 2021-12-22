@@ -1,0 +1,4 @@
+timer.bathroom_motion:
+  editable: true
+light.bathroom_lights:
+  icon: mdi:toilet

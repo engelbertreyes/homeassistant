@@ -1,0 +1,162 @@
+- id: bd0520e9-2b0d-4f4d-bb15-61af93b0d764
+  alias: (testing) tags and automations
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: a117c08c-b9da-4362-880e-90a44fcaa964
+  condition: []
+  action:
+  - service: notify.chat_privado
+    data:
+      message: tag scaneado
+  mode: single
+- id: 723251c1-24ae-4771-8c99-9a8b88fffd20''
+  alias: Anadir huevos
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: bfd1f08c-563e-4901-828f-462fdfefb50f
+  condition: []
+  action:
+  - service: shopping_list.add_item
+    data:
+      name: Carton de Huevos
+  mode: single
+- id: d839c2fe-2320-47a3-b6f9-0ef1d9b0a5d3
+  alias: Master Bedroom - Good Night
+  description: Arm the alarm with one button and execute good night script
+  trigger:
+  - platform: device
+    type: turned_off
+    device_id: 6c015040aa52575cacfd6214c22591c1
+    entity_id: light.master_bedroom_child_bed_lamps_upper_button_unconnected_virtual_both_lamps
+    domain: light
+  condition: []
+  action:
+  - service: alarmo.arm
+    data:
+      entity_id: alarm_control_panel.alarmo
+      mode: home
+      force: true
+  - service: script.good_night
+  mode: single
+- id: 513bab25-a018-418b-9b57-12a0945f1c02
+  alias: Start the car
+  description: Notify car started
+  trigger:
+  - platform: state
+    entity_id: sensor.engelberts_iphone_activity
+    to: Automotive
+  condition: []
+  action:
+  - service: notify.chat_privado
+    data:
+      message: Has encendido El carro
+      title: Carro on
+  mode: single
+- id: '1633369474617'
+  alias: Send actionable notifications for Android
+  description: ''
+  use_blueprint:
+    path: vorion/actionable-notifications-for-android.yaml
+    input:
+      notify_device: 59b249ffce0ec147e116f904b8675cfa
+      trigger_entity: input_boolean.cerco_electrico
+      notification_title: cerco electrico
+      notification_message: Se encendio el cerco
+      action_1_title: Apagar
+      first_action:
+      - service: switch.turn_off
+        target:
+          entity_id: switch.cerco_electrico
+- id: '1633822929273'
+  alias: Tag White tag is scanned (Arm the alarm)
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: 8962a1f3-23d0-4b3c-a5a9-30667d55b080
+  condition: []
+  action:
+  - service: alarmo.arm
+    data:
+      entity_id: alarm_control_panel.alarmo
+      mode: home
+  mode: single
+- id: '1639854326936'
+  alias: Sofia phone discharging
+  description: ''
+  trigger:
+  - platform: time
+    at: '20:00:00'
+  - platform: numeric_state
+    entity_id: sensor.android_sofia_battery_level
+    below: '10'
+  condition:
+  - condition: state
+    entity_id: sensor.android_sofia_battery_state
+    state: discharging
+  action:
+  - service: notify.chat_privado
+    data:
+      message: Sofia tiene el celular menos del 10% de Carga
+  mode: single
+- id: '1640117663995'
+  alias: Turn light off if sun is up
+  description: Turn light off if sun is up
+  trigger:
+  - platform: state
+    entity_id: switch.kitchen_to_the_basement_bottom
+    id: garage
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 1
+  - platform: state
+    entity_id: switch.balcony_top
+    id: balcon
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 1
+  - platform: state
+    entity_id: light.garden
+    id: jardin
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 1
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: garage
+      - condition: sun
+        before: sunset
+      sequence:
+      - service: switch.turn_off
+        target:
+          entity_id: switch.kitchen_to_the_basement_bottom
+    - conditions:
+      - condition: trigger
+        id: balcon
+      - condition: sun
+        before: sunset
+      sequence:
+      - service: switch.turn_off
+        target:
+          entity_id: switch.balcony_top
+    - conditions:
+      - condition: trigger
+        id: jardin
+      - condition: sun
+        before: sunset
+      sequence:
+      - service: light.turn_off
+        target:
+          entity_id: light.garden
+    default: []
+  mode: single

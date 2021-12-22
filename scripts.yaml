@@ -1,0 +1,95 @@
+good_night:
+  alias: Good Night
+  sequence:
+  - service: light.turn_off
+    target:
+      entity_id:
+      - light.common_area_lights
+  - service: light.turn_off
+    target:
+      entity_id:
+      - light.all_bedrooms_lights
+  - service: light.turn_off
+    target:
+      entity_id:
+      - light.all_bathroom_and_dresser_lights
+  - service: switch.toggle
+    target:
+      entity_id: switch.virtual_main_shutter_button_down
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 1
+      milliseconds: 0
+  - service: switch.toggle
+    target:
+      entity_id: switch.virtual_kitchen_shutter_button_down
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 1
+      milliseconds: 0
+  - service: switch.toggle
+    target:
+      entity_id: switch.virtual_second_shutter_down
+  - service: notify.chat_privado
+    data:
+      message: Se están apagando las luces y cerrando todos los Shutters
+      title: Hora de dormir
+  mode: single
+  icon: mdi:bed
+learn_tv_commands:
+  alias: learn ac codes
+  sequence:
+  - service: remote.learn_command
+    target:
+      entity_id: remote.rm_pro_remote
+    data:
+      device: main_ac
+      command:
+      - 16
+      - 17
+      - 18
+      - 19
+      - 20
+      - 21
+      - 22
+      - 23
+      - 24
+      - 25
+      - 26
+  mode: single
+open_shutter:
+  alias: Open shutter
+  sequence:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.main_entrance_sonoff
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 1
+      milliseconds: 0
+  - service: switch.toggle
+    target:
+      entity_id: switch.virtual_main_shutter_button_up
+  mode: single
+llegue_yo:
+  sequence:
+  - service: switch.toggle
+    target:
+      entity_id: switch.boton_virtual_para_el_porton
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 1
+      milliseconds: 0
+  - service: switch.turn_on
+    target:
+      entity_id: switch.virtual_main_shutter_button_up
+  - service: notify.chat_privado
+    data:
+      message: Se están abriendo la marquesina y el Shutter principal
+      title: Llegada a Casa
+  mode: single
+  alias: llegue yo
