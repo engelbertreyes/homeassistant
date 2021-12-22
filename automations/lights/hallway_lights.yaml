@@ -1,0 +1,205 @@
+id: 27789443-c644-43d9-89fd-080ad6f491d9
+alias: (YAML) Hallway lights
+description: ''
+trigger:
+  - platform: state
+    entity_id: switch.hallway_entrance_bottom
+    id: 1_lower_on
+    to: 'on'
+  - platform: state
+    entity_id: switch.hallway_entrance_bottom
+    id: 1_lower_off
+    to: 'off'
+  - platform: state
+    entity_id: switch.hallway_center_bottom
+    id: 2_lower_on
+    to: 'on'
+  - platform: state
+    entity_id: switch.hallway_center_bottom
+    id: 2_lower_off
+    to: 'off'
+  - platform: state
+    entity_id: switch.hallway_end_bottom
+    id: 3_lower_on
+    to: 'on'
+  - platform: state
+    entity_id: switch.hallway_end_bottom
+    id: 3_lower_off
+    to: 'off'
+  - platform: state
+    entity_id: switch.hallway_entrance_center
+    id: 1_upper_on
+    to: 'on'
+  - platform: state
+    entity_id: switch.hallway_entrance_center
+    id: 1_upper_off
+    to: 'off'
+  - platform: state
+    entity_id: switch.hallway_center_top
+    id: 2_upper_on
+    to: 'on'
+  - platform: state
+    entity_id: switch.hallway_center_top
+    id: 2_upper_off
+    to: 'off'
+  - platform: state
+    entity_id: switch.hallway_end_top
+    id: 3_upper_on
+    to: 'on'
+  - platform: state
+    entity_id: switch.hallway_end_top
+    id: 3_upper_off
+    to: 'off'
+  - platform: state
+    entity_id: switch.switch_hallway_entrance_top
+    id: one_button_on
+    to: 'on'
+  - platform: state
+    entity_id: switch.switch_hallway_entrance_top
+    id: one_button_off
+    to: 'off'
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: 1_lower_on
+        sequence:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.hallway_center_bottom
+          - service: switch.turn_on
+            target:
+              entity_id: switch.hallway_end_bottom
+      - conditions:
+          - condition: trigger
+            id: 1_lower_off
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.hallway_end_bottom
+          - service: switch.turn_off
+            target:
+              entity_id: switch.hallway_center_bottom
+      - conditions:
+          - condition: trigger
+            id: 2_lower_on
+        sequence:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.hallway_entrance_bottom
+          - service: switch.turn_on
+            target:
+              entity_id: switch.hallway_end_bottom
+      - conditions:
+          - condition: trigger
+            id: 2_lower_off
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.hallway_end_bottom
+          - service: switch.turn_off
+            target:
+              entity_id: switch.hallway_entrance_bottom
+      - conditions:
+          - condition: trigger
+            id: 3_lower_on
+        sequence:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.hallway_entrance_bottom
+          - service: switch.turn_on
+            target:
+              entity_id: switch.hallway_center_bottom
+      - conditions:
+          - condition: trigger
+            id: 3_lower_off
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.hallway_center_bottom
+          - service: switch.turn_off
+            target:
+              entity_id: switch.hallway_entrance_bottom
+      - conditions:
+          - condition: trigger
+            id: 1_upper_on
+        sequence:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.hallway_center_top
+          - service: switch.turn_on
+            target:
+              entity_id: switch.hallway_end_top
+      - conditions:
+          - condition: trigger
+            id: 1_upper_off
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.hallway_center_top
+          - service: switch.turn_off
+            target:
+              entity_id: switch.hallway_end_top
+      - conditions:
+          - condition: trigger
+            id: 2_upper_on
+        sequence:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.hallway_entrance_center
+          - service: switch.turn_on
+            target:
+              entity_id: switch.hallway_end_top
+      - conditions:
+          - condition: trigger
+            id: 2_upper_off
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.hallway_end_top
+          - service: switch.turn_off
+            target:
+              entity_id: switch.hallway_entrance_center
+      - conditions:
+          - condition: trigger
+            id: 3_upper_on
+        sequence:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.hallway_entrance_center
+          - service: switch.turn_on
+            target:
+              entity_id: switch.hallway_center_top
+      - conditions:
+          - condition: trigger
+            id: 3_upper_off
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.hallway_center_top
+          - service: switch.turn_off
+            target:
+              entity_id: switch.hallway_entrance_center
+      - conditions:
+          - condition: trigger
+            id: one_button_on
+        sequence:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.hallway_entrance_bottom
+          - service: switch.turn_on
+            target:
+              entity_id: switch.hallway_entrance_center
+      - conditions:
+          - condition: trigger
+            id: one_button_off
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.hallway_entrance_bottom
+          - service: switch.turn_off
+            target:
+              entity_id: switch.hallway_entrance_center
+    default: []
+mode: single

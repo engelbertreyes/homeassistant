@@ -1,0 +1,37 @@
+id: 92dd69c8-7fde-4f9b-97a5-8f5dcd971493
+alias: (YAML) Washing area lights
+description: ''
+trigger:
+  - platform: state
+    entity_id: switch.washing_area_top
+    id: basement_entrance_off
+    to: 'off'
+  - platform: state
+    entity_id: switch.washing_area_top
+    id: basement_entrance_on
+    to: 'on'
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: basement_entrance_off
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: light.dryer
+          - service: light.turn_off
+            target:
+              entity_id: light.washing_machine
+      - conditions:
+          - condition: trigger
+            id: basement_entrance_on
+        sequence:
+          - service: light.turn_on
+            target:
+              entity_id: light.dryer
+          - service: light.turn_on
+            target:
+              entity_id: light.washing_machine
+    default: []
+mode: single

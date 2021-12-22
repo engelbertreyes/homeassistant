@@ -1,0 +1,47 @@
+id: b3632768-ae6e-44a2-99d1-e2cf0b819cef
+alias: (YAML) Kitchen - Door Entrance notifier
+description: ''
+trigger:
+  - platform: state
+    entity_id: binary_sensor.contact_garage_to_kitchen_door_contact
+    to: 'on'
+    id: open
+  - platform: state
+    entity_id: binary_sensor.contact_garage_to_kitchen_door_contact
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 0
+    id: close
+#condition:
+#  - condition: time
+#    after: '22:00:00'
+#    before: '06:00:00'
+#    weekday:
+#      - mon
+#      - tue
+#      - wed
+#      - thu
+#      - fri
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: open
+        sequence:
+          - service: notify.chat_privado
+            data:
+              message: Puerta Cocina Abierta
+              title: Puerta Marquesina
+      - conditions:
+          - condition: trigger
+            id: close
+        sequence:
+          - service: notify.chat_privado
+            data:
+              message: Puerta Cocina Cerrada
+              title: Puerta Marquesina
+    default: []
+mode: single

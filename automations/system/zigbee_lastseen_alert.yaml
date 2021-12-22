@@ -1,0 +1,21 @@
+#####
+# Trigger automation if there is any Zigbee device in binary_sensor 
+# Thanks to @deadly667
+#####
+
+alias: (YAML) Zigbee unhealthy alert
+id: c700030a-d0c7-4912-9172-9e09e5ca2ba3
+
+trigger:
+- platform: state
+  entity_id: binary_sensor.z2m_health
+  to: 'on'
+
+condition: []
+
+action:
+- service: nofity.chat_privado
+  data:
+    message: "{{state_attr('binary_sensor.z2m_health', 'data')}}"
+    title: "❌ Zigbee last seen ❌️:"
+mode: single

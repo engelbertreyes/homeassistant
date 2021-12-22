@@ -1,0 +1,240 @@
+id: ef81808d-e564-4958-9e31-76776f8fac36
+alias: (YAML) Basement - AC
+description: ''
+trigger:
+  - platform: numeric_state
+    entity_id: light.virtual_basement_air_conditioner
+    id: '26'
+    attribute: brightness
+    above: '0'
+    below: '26'
+  - platform: numeric_state
+    entity_id: light.virtual_basement_air_conditioner
+    id: 27-51
+    attribute: brightness
+    above: '27'
+    below: '51'
+  - platform: numeric_state
+    entity_id: light.virtual_basement_air_conditioner
+    id: 52-77
+    attribute: brightness
+    above: '52'
+    below: '77'
+  - platform: numeric_state
+    entity_id: light.virtual_basement_air_conditioner
+    id: 78-102
+    attribute: brightness
+    above: '78'
+    below: '102'
+  - platform: numeric_state
+    entity_id: light.virtual_basement_air_conditioner
+    id: 103-128
+    attribute: brightness
+    above: '103'
+    below: '128'
+  - platform: numeric_state
+    entity_id: light.virtual_basement_air_conditioner
+    id: 129-153
+    attribute: brightness
+    above: '129'
+    below: '153'
+  - platform: numeric_state
+    entity_id: light.virtual_basement_air_conditioner
+    id: 154-179
+    attribute: brightness
+    above: '154'
+    below: '179'
+  - platform: numeric_state
+    entity_id: light.virtual_basement_air_conditioner
+    id: 180-204
+    attribute: brightness
+    above: '180'
+    below: '204'
+  - platform: numeric_state
+    entity_id: light.virtual_basement_air_conditioner
+    id: 205-230
+    attribute: brightness
+    above: '205'
+    below: '230'
+  - platform: numeric_state
+    entity_id: light.virtual_basement_air_conditioner
+    id: 231-254
+    attribute: brightness
+    above: '230'
+    below: '254'
+  - platform: numeric_state
+    entity_id: light.virtual_basement_air_conditioner
+    id: '255'
+    attribute: brightness
+    above: '254'
+  - platform: state
+    entity_id: light.virtual_basement_air_conditioner
+    id: 'on'
+    to: 'on'
+  - platform: state
+    entity_id: light.virtual_basement_air_conditioner
+    id: 'off'
+    to: 'off'
+  - platform: state
+    entity_id: switch.switch_basement_bar_bottom
+    id: switch_on
+    to: 'on'
+  - platform: state
+    entity_id: switch.switch_basement_bar_bottom
+    id: switch_off
+    to: 'off'
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: '26'
+        sequence:
+          - service: remote.send_command
+            target:
+              entity_id: remote.rm_mini_sotano
+            data:
+              device: aire_sotano
+              command: 26_fan_auto_swing
+      - conditions:
+          - condition: trigger
+            id: 27-51
+        sequence:
+          - service: remote.send_command
+            target:
+              entity_id: remote.rm_mini_sotano
+            data:
+              device: aire_sotano
+              command: 25_fan_auto_swing
+      - conditions:
+          - condition: trigger
+            id: 52-77
+        sequence:
+          - service: remote.send_command
+            target:
+              entity_id: remote.rm_mini_sotano
+            data:
+              device: aire_sotano
+              command: 24_fan_auto_swing
+      - conditions:
+          - condition: trigger
+            id: 78-102
+        sequence:
+          - service: remote.send_command
+            target:
+              entity_id: remote.rm_mini_sotano
+            data:
+              device: aire_sotano
+              command: 23_fan_auto_swing
+      - conditions:
+          - condition: trigger
+            id: 103-128
+        sequence:
+          - service: remote.send_command
+            target:
+              entity_id: remote.rm_mini_sotano
+            data:
+              device: aire_sotano
+              command: 22_fan_auto_swing
+      - conditions:
+          - condition: trigger
+            id: 129-153
+        sequence:
+          - service: remote.send_command
+            target:
+              entity_id: remote.rm_mini_sotano
+            data:
+              device: aire_sotano
+              command: 21_fan_auto_swing
+      - conditions:
+          - condition: trigger
+            id: 154-179
+        sequence:
+          - service: remote.send_command
+            target:
+              entity_id: remote.rm_mini_sotano
+            data:
+              device: aire_sotano
+              command: 20_fan_auto_swing
+      - conditions:
+          - condition: trigger
+            id: 180-204
+        sequence:
+          - service: remote.send_command
+            target:
+              entity_id: remote.rm_mini_sotano
+            data:
+              device: aire_sotano
+              command: 19_fan_auto_swing
+      - conditions:
+          - condition: trigger
+            id: 205-230
+        sequence:
+          - service: remote.send_command
+            target:
+              entity_id: remote.rm_mini_sotano
+            data:
+              device: aire_sotano
+              command: 18_fan_auto_swing
+      - conditions:
+          - condition: trigger
+            id: 231-254
+        sequence:
+          - service: remote.send_command
+            target:
+              entity_id: remote.rm_mini_sotano
+            data:
+              device: aire_sotano
+              command: 17_fan_auto_swing
+      - conditions:
+          - condition: trigger
+            id: '255'
+        sequence:
+          - service: remote.send_command
+            target:
+              entity_id: remote.rm_mini_sotano
+            data:
+              device: aire_sotano
+              command: 16_fan_auto_swing
+      - conditions:
+          - condition: trigger
+            id: 'on'
+        sequence:
+          - service: remote.send_command
+            target:
+              entity_id: remote.rm_mini_sotano
+            data:
+              device: aire_sotano
+              command: 22_fan_auto_swing
+      - conditions:
+          - condition: trigger
+            id: 'off'
+        sequence:
+          - service: remote.send_command
+            target:
+              entity_id: remote.rm_mini_sotano
+            data:
+              device: aire_sotano
+              command: 'off'
+      - conditions:
+          - condition: trigger
+            id: switch_on
+        sequence:
+          - service: remote.send_command
+            target:
+              entity_id: remote.rm_mini_sotano
+            data:
+              device: aire_sotano
+              command: 22_fan_auto_swing
+#      - conditions:
+#          - condition: trigger
+#            id: switch_off
+#        sequence:
+#          - service: remote.send_command
+#            target:
+#              entity_id: remote.rm_mini_sotano
+#            data:
+#              device: aire_sotano
+#              command: 'off'
+    default: []
+mode: single

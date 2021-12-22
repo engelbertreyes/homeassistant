@@ -1,0 +1,63 @@
+id: e2d6db96-ecf3-4fe7-9163-6e9c5d1e2a52
+alias: (YAML) Sunset lights (off/on)
+description: Turn on external lights at sunset and off at sunrise and keep on at night
+trigger:
+  - event: sunrise
+    platform: sun
+    id: sun_has_risen
+  - platform: sun
+    event: sunset
+    id: sun_has_set
+  - platform: state
+    entity_id: group.exterior
+    id: manual_off
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 0
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: sun_has_risen
+          - condition: state
+            entity_id: input_select.light_mode_common
+            state: Automaticas
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: light.exterior_lights
+      - conditions:
+          - condition: trigger
+            id: sun_has_set
+          - condition: state
+            entity_id: input_select.light_mode_common
+            state: Automaticas
+        sequence:
+          - service: light.turn_on
+            target:
+              entity_id: light.exterior_lights
+          - service: notify.alexa_media
+            data:
+              data:
+                type: tts
+              message: Estoy encendiendo las luces exteriores, se acaba de poner el sol
+              target:
+                - media_player.cuarto_principal 
+      - conditions:
+          - condition: trigger
+            id: manual_off
+          - condition: sun
+            after: sunset
+          - condition: state
+            entity_id: input_select.light_mode_common
+            state: Automaticas
+        sequence:
+          - service: light.turn_on
+            target:
+              entity_id: light.exterior_lights
+    default: []
+mode: single

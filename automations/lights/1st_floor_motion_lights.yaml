@@ -1,0 +1,73 @@
+id: afa2658a-03ca-4fee-9008-817c14e6b621
+alias: (YAML) First Floor - Automatic lights based on motion and illuminance
+description: Currently set at 5 minutes and 100 lux.  
+trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_1st_floor_hallway_occupancy
+    id: motion_stopped
+    to: 'off'
+  - platform: event
+    event_type: timer.finished
+    id: timer_finished
+    event_data:
+      entity_id: timer.1st_floor_hallway_motion
+  - platform: state
+    entity_id: binary_sensor.motion_1st_floor_hallway_occupancy
+    id: motion_detected
+    to: 'on'
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: motion_stopped
+        sequence:
+          - service: timer.start
+            target:
+              entity_id:
+                - timer.1st_floor_hallway_motion
+            data:
+              duration: '0'
+      - conditions:
+          - condition: trigger
+            id: timer_finished
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: >-
+                light.dining_room_lamp
+          - service: light.turn_off
+            target:
+              entity_id: >-
+                light.dining_room_spotlight
+          - service: light.turn_off
+            target:
+              entity_id: >-
+                light.1st_floor_spotlights
+      - conditions:
+          - condition: trigger
+            id: motion_detected
+          - condition: numeric_state
+            entity_id: sensor.motion_1st_floor_hallway_illuminance_lux
+            below: '100'
+          - condition: state
+            entity_id: input_select.light_mode_common
+            state: Automaticas
+        sequence:
+          - service: timer.cancel
+            target:
+              entity_id: timer.1st_floor_hallway_motion
+          - service: light.turn_on
+            target:
+              entity_id: >-
+                light.dining_room_lamp
+          - service: light.turn_on
+            target:
+              entity_id: >-
+                light.dining_room_spotlight
+          - service: light.turn_on
+            target:
+              entity_id: >-
+                light.1st_floor_spotlights
+    default: []
+mode: single

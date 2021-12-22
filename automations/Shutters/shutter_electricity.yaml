@@ -1,0 +1,31 @@
+id: 00122430-a10d-4525-a357-40bff01de688
+alias: (YAML) Cut Electricity on shutter if door is open
+description: ''
+trigger:
+  - platform: state
+    entity_id: binary_sensor.contact_main_entrance_contact
+    to: 'on'
+    id: door_open
+  - platform: state
+    entity_id: binary_sensor.contact_main_entrance_contact
+    to: 'off'
+    id: door_closed
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: door_closed
+        sequence:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.switch_main_shutter_electricity_2
+      - conditions:
+          - condition: trigger
+            id: door_open
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.switch_main_shutter_electricity_2
+    default: []
+mode: single

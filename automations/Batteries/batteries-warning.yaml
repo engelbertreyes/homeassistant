@@ -1,0 +1,20 @@
+#####
+# Send state of the battery to Telegram/notify
+#####
+
+alias: (YAML) Low battery notification
+id: 405c1997-e24b-4c74-99b9-3cd29bb4b797
+
+trigger:
+  entity_id: sensor.low_batteries
+  platform: state
+
+condition:
+  condition: template
+  value_template: '{% if states("sensor.low_batteries") %}true{% else %}false{% endif %}'
+
+action:
+- service: notify.chat_privado
+  data:
+    message: 'There are low batteries: {{ states("sensor.low_batteries") }}'
+    title: Low batteries

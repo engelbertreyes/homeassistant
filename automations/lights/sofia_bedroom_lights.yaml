@@ -1,0 +1,37 @@
+id: feb2064f-25e0-4686-b6dc-78df68b126b4
+alias: (YAML) Sofia lights
+description: ''
+trigger:
+  - platform: state
+    entity_id: switch.sofia_s_bedroom_top
+    id: one_button_on
+    to: 'on'
+  - platform: state
+    entity_id: switch.sofia_s_bedroom_top
+    id: one_button_off
+    to: 'off'
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: one_button_on
+        sequence:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.sofia_s_bedroom_bottom
+          - service: switch.turn_on
+            target:
+              entity_id: switch.sofia_s_bedroom_center
+      - conditions:
+          - condition: trigger
+            id: one_button_off
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.sofia_s_bedroom_bottom
+          - service: switch.turn_off
+            target:
+              entity_id: switch.sofia_s_bedroom_center
+    default: []
+mode: single

@@ -1,0 +1,105 @@
+id: e3765d9f-d21a-45d2-8f04-312c1a8fd177
+alias: (YAML) Basement Stairs - Automatic lights based on motion and illuminance
+description: Currently set at 5 minutes and 200 lux.  
+trigger:
+  - platform: state
+    entity_id: light.basement_stairs
+    to: 'on'
+    id: manual_on
+  - platform: event
+    event_type: timer.finished
+    id: timer_finished
+    event_data:
+      entity_id: timer.basement_stairs_motion
+  - platform: state
+    entity_id: binary_sensor.motion_basement_stairs_occupancy
+    id: motion_detected
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.contact_basement_door_contact
+    id: door_open
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.contact_basement_door_contact
+    id: door_closed
+    to: 'off'
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: manual_on
+        sequence:
+          - service: timer.start
+            target:
+              entity_id:
+                - timer.basement_stairs_motion
+            data:
+              duration: '0'
+      - conditions:
+          - condition: trigger
+            id: motion_stopped
+        sequence:
+          - service: timer.start
+            target:
+              entity_id:
+                - timer.basement_stairs_motion
+            data:
+              duration: '0'
+      - conditions:
+          - condition: trigger
+            id: timer_finished
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: >-
+                light.basement_stairs
+          - service: light.turn_off
+            target:
+              entity_id: light.washing_machine
+          - service: light.turn_off
+            target:
+              entity_id: light.dryer
+      - conditions:
+          - condition: trigger
+            id: door_open
+        sequence:
+          - service: light.turn_on
+            target:
+              entity_id: >-
+                light.basement_stairs
+          - service: light.turn_on
+            target:
+              entity_id: light.washing_machine
+          - service: light.turn_on
+            target:
+              entity_id: light.dryer
+      - conditions:
+          - condition: trigger
+            id: door_closed
+        sequence:
+          - service: timer.start
+            target:
+              entity_id:
+                - timer.basement_stairs_motion
+            data:
+              duration: '0'
+      - conditions:
+          - condition: trigger
+            id: motion_detected
+        sequence:
+          - service: timer.cancel
+            target:
+              entity_id: timer.basement_stairs_motion
+          - service: light.turn_on
+            target:
+              entity_id: >-
+                light.basement_stairs
+          - service: light.turn_on
+            target:
+              entity_id: light.washing_machine
+          - service: light.turn_on
+            target:
+              entity_id: light.dryer
+    default: []
+mode: single

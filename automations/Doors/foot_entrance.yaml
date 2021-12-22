@@ -1,0 +1,18 @@
+id: d966126a-d646-4a4c-bead-89366bc9ddd6
+alias: (YAML) Foot Entrance
+description: ''
+trigger:
+  - platform: state
+    entity_id: switch.foot_entrance
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 1
+      milliseconds: 0
+condition: []
+action:
+  - service: switch.turn_off
+    target:
+      entity_id: switch.foot_entrance
+mode: single

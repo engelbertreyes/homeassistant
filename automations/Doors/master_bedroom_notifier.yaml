@@ -1,0 +1,25 @@
+id: 30b0e073-80ac-4ff5-9d6e-2ef18a8c020d
+alias: (YAML) Master Bedroom notifier
+description: ''
+trigger:
+  - platform: state
+    entity_id: binary_sensor.contact_master_bedroom_main_door_contact
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 2
+      seconds: 0
+      milliseconds: 0
+condition: []
+action:
+  - service: notify.chat_privado
+    data:
+      message: Se ha abierto la puerta del cuarto
+  - service: notify.alexa_media
+    data:
+      data:
+        type: tts
+      message: Alguien dejó abierta la puerta del cuarto.  No sé quien fue.
+      target:
+        - media_player.cuarto_principal
+mode: single

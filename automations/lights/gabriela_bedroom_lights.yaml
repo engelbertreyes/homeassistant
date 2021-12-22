@@ -1,0 +1,37 @@
+id: c136a5b0-43f2-490d-a127-dc2d64038eb1
+alias: (YAML) Gabrielas lights
+description: ''
+trigger:
+  - platform: state
+    entity_id: switch.gabriela_s_bedroom_top
+    id: one_button_on
+    to: 'on'
+  - platform: state
+    entity_id: switch.gabriela_s_bedroom_top
+    id: one_button_off
+    to: 'off'
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: one_button_on
+        sequence:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.gabriela_s_bedroom_bottom
+          - service: switch.turn_on
+            target:
+              entity_id: switch.gabriela_s_bedroom_center
+      - conditions:
+          - condition: trigger
+            id: one_button_off
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.gabriela_s_bedroom_bottom
+          - service: switch.turn_off
+            target:
+              entity_id: switch.gabriela_s_bedroom_center
+    default: []
+mode: single

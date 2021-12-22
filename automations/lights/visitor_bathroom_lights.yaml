@@ -1,0 +1,99 @@
+id: 74ea5c86-8f33-4622-9f7d-a7669720b1e6
+alias: (YAML) Visitor's Bathroom - Automatic lights based on motion and illuminance
+description: Currently set at 5 minutes and 220 lux
+trigger:
+  - platform: state
+    entity_id: switch.visitors_bathroom_bottom
+    to: 'on'
+    id: lower_light
+  - platform: state
+    entity_id: switch.visitors_bathroom_center
+    to: 'on'
+    id: upper_light
+  - platform: state
+    entity_id: binary_sensor.motion_visitors_bathroom_occupancy
+    id: motion_stopped
+    to: 'off'
+  - platform: event
+    event_type: timer.finished
+    id: timer_finished
+    event_data:
+      entity_id: timer.visitors_bathroom
+  - platform: state
+    entity_id: binary_sensor.motion_visitors_bathroom_occupancy
+    id: motion_detected
+    to: 'on'
+  - platform: state
+    entity_id: switch.visitors_bathroom_top
+    to: 'on'
+    id: switch_on
+  - platform: state
+    entity_id: switch.visitors_bathroom_top
+    to: 'off'
+    id: switch_off
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: lower_light
+        sequence:
+          - service: timer.start
+            data:
+              duration: '0'
+            target:
+              entity_id: timer.visitors_bathroom
+      - conditions:
+          - condition: trigger
+            id: upper_light
+        sequence:
+          - service: timer.start
+            data:
+              duration: '0'
+            target:
+              entity_id: timer.visitors_bathroom
+      - conditions:
+          - condition: trigger
+            id: motion_stopped
+        sequence:
+          - service: timer.start
+            data:
+              duration: '0'
+            target:
+              entity_id: timer.visitors_bathroom
+      - conditions:
+          - condition: trigger
+            id: timer_finished
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: light.visitor_bathroom_lights
+      - conditions:
+          - condition: trigger
+            id: switch_on
+        sequence:
+          - service: light.turn_on
+            target:
+              entity_id: light.visitor_bathroom_lights
+      - conditions:
+          - condition: trigger
+            id: switch_off
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: light.visitor_bathroom_lights
+      - conditions:
+          - condition: trigger
+            id: motion_detected
+          - condition: numeric_state
+            entity_id: sensor.motion_visitors_bathroom_illuminance_lux
+            below: '220'
+        sequence:
+          - service: timer.cancel
+            target:
+              entity_id: timer.visitors_bathroom
+          - service: light.turn_on
+            target:
+              entity_id: light.visitor_bathroom_lights
+    default: []
+mode: single

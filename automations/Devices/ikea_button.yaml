@@ -1,0 +1,155 @@
+id: 6f6f5fcc-415b-40ea-9270-756af5d766f7
+alias: (YAML) IKEA 5 button controller
+description: ''
+trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 0fe2058281cd1a3abac3098b247ec263
+    type: action
+    subtype: brightness_up_click
+    discovery_id: 0x842e14fffe1c5256 action_brightness_up_click
+    id: bright_up
+  - platform: device
+    domain: mqtt
+    device_id: 0fe2058281cd1a3abac3098b247ec263
+    type: action
+    subtype: brightness_down_click
+    discovery_id: 0x842e14fffe1c5256 action_brightness_down_click
+    id: bright_down
+  - platform: device
+    domain: mqtt
+    device_id: 0fe2058281cd1a3abac3098b247ec263
+    type: action
+    subtype: brightness_up_hold
+    discovery_id: 0x842e14fffe1c5256 action_brightness_up_hold
+    id: hold_bright_up
+  - platform: device
+    domain: mqtt
+    device_id: 0fe2058281cd1a3abac3098b247ec263
+    type: action
+    subtype: toggle
+    discovery_id: 0x842e14fffe1c5256 action_toggle
+    id: toggle
+  - platform: device
+    domain: mqtt
+    device_id: 0fe2058281cd1a3abac3098b247ec263
+    type: action
+    subtype: brightness_down_hold
+    discovery_id: 0x842e14fffe1c5256 action_brightness_down_hold
+    id: hold_bright_down
+  - platform: device
+    domain: mqtt
+    device_id: 0fe2058281cd1a3abac3098b247ec263
+    type: action
+    subtype: arrow_left_click
+    discovery_id: 0x842e14fffe1c5256 action_arrow_left_click
+    id: left
+  - platform: device
+    domain: mqtt
+    device_id: 0fe2058281cd1a3abac3098b247ec263
+    type: action
+    subtype: arrow_right_click
+    discovery_id: 0x842e14fffe1c5256 action_arrow_right_click
+    id: right
+  - platform: device
+    domain: mqtt
+    device_id: 0fe2058281cd1a3abac3098b247ec263
+    type: action
+    subtype: arrow_left_hold
+    discovery_id: 0x842e14fffe1c5256 action_arrow_left_hold
+    id: left_hold
+  - platform: device
+    domain: mqtt
+    device_id: 0fe2058281cd1a3abac3098b247ec263
+    type: action
+    subtype: arrow_right_hold
+    discovery_id: 0x842e14fffe1c5256 action_arrow_right_hold
+    id: right_hold
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: bright_up
+        sequence:
+          - service: light.turn_on
+            target:
+              entity_id: light.main_room_lights
+      - conditions:
+          - condition: trigger
+            id: bright_down
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: light.main_room_lights
+      - conditions:
+          - condition: trigger
+            id: hold_bright_up
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: light.master_bedroom_engelbert_s_bedlamp
+          - service: light.turn_off
+            target:
+              entity_id: light.master_bedroom_yini_s_bedlamp
+          - service: light.turn_off
+            target:
+              entity_id: light.master_bedroom_main_lights
+          - service: light.turn_on
+            target:
+              entity_id: light.master_bedroom_led_strip
+          - service: light.turn_off
+            target:
+              entity_id: light.master_bedroom_engelbert_s_spotlights
+          - service: light.turn_off
+            target:
+              entity_id: light.master_bedroom_yini_s_spotlights
+      - conditions:
+          - condition: trigger
+            id: hold_bright_down
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: light.main_room_lights
+          - service: light.turn_on
+            target:
+              entity_id: light.master_bedroom_engelbert_s_bedlamp
+          - service: light.turn_on
+            target:
+              entity_id: light.master_bedroom_yini_s_bedlamp
+      - conditions:
+          - condition: trigger
+            id: left
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: light.main_room_lights
+          - service: light.turn_on
+            target:
+              entity_id: light.master_bedroom_yini_s_spotlights
+      - conditions:
+          - condition: trigger
+            id: right
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: light.main_room_lights
+          - service: light.turn_on
+            target:
+              entity_id: light.master_bedroom_engelbert_s_spotlights
+      - conditions:
+          - condition: trigger
+            id: right_hold
+        sequence:
+          - service: light.turn_on
+            target:
+              entity_id: light.virtual_main_room_air_conditioner
+      - conditions:
+          - condition: trigger
+            id: left_hold
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: light.virtual_main_room_air_conditioner
+    default: []
+mode: single

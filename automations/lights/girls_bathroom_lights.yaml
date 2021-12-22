@@ -1,0 +1,97 @@
+id: ba14fd49-3271-4dfe-927a-4d3c5f658256
+alias: (YAML) Girls bathroom lights
+description: ''
+trigger:
+  - platform: state
+    entity_id: switch.girls_bathroom_gabriela_s_side_bottom
+    id: left_lower_on
+    to: 'on'
+  - platform: state
+    entity_id: switch.girls_bathroom_gabriela_s_side_bottom
+    id: left_lower_off
+    to: 'off'
+  - platform: state
+    entity_id: switch.girls_bathroom_sofia_s_side_bottom
+    id: right_lower_on
+    to: 'on'
+  - platform: state
+    entity_id: switch.girls_bathroom_sofia_s_side_bottom
+    id: right_lower_off
+    to: 'off'
+  - platform: state
+    entity_id: switch.girls_bathroom_sofia_s_side_top
+    id: left_upper_on
+    to: 'on'
+  - platform: state
+    entity_id: switch.girls_bathroom_sofia_s_side_top
+    id: left_upper_off
+    to: 'off'
+  - platform: state
+    entity_id: switch.girls_bathroom_gabriela_s_side_top
+    id: right_upper_on
+    to: 'on'
+  - platform: state
+    entity_id: switch.girls_bathroom_gabriela_s_side_top
+    id: right_upper_off
+    to: 'off'
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: left_lower_on
+        sequence:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.girls_bathroom_sofia_s_side_bottom
+      - conditions:
+          - condition: trigger
+            id: left_lower_off
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.girls_bathroom_sofia_s_side_bottom
+      - conditions:
+          - condition: trigger
+            id: right_lower_on
+        sequence:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.girls_bathroom_gabriela_s_side_bottom
+      - conditions:
+          - condition: trigger
+            id: right_lower_off
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.girls_bathroom_gabriela_s_side_bottom
+      - conditions:
+          - condition: trigger
+            id: left_upper_on
+        sequence:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.girls_bathroom_gabriela_s_side_top
+      - conditions:
+          - condition: trigger
+            id: left_upper_off
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.girls_bathroom_gabriela_s_side_top
+      - conditions:
+          - condition: trigger
+            id: right_upper_on
+        sequence:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.girls_bathroom_sofia_s_side_top
+      - conditions:
+          - condition: trigger
+            id: right_upper_off
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.girls_bathroom_sofia_s_side_top
+    default: []
+mode: single

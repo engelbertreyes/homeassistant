@@ -1,0 +1,196 @@
+id: 840827ec-ac72-4eaa-aeec-f72680ec881f
+alias: (YAML) Addons report
+description: This one notifies on telegram when an addon is stopped
+trigger:
+  - platform: state
+    entity_id: binary_sensor.check_home_assistant_configuration_running
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+    id: hasscheck
+  - platform: state
+    entity_id: binary_sensor.duck_dns_running
+    id: duckdns
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  - platform: state
+    entity_id: binary_sensor.file_editor_running
+    id: fileeditor
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  - platform: state
+    entity_id: binary_sensor.home_assistant_operating_system_running
+    id: os
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  - platform: state
+    entity_id: binary_sensor.let_s_encrypt_running
+    id: lets
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  - platform: state
+    entity_id: binary_sensor.mariadb_running
+    id: maria
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  - platform: state
+    entity_id: binary_sensor.mosquitto_broker_running
+    id: mosquitto
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  - platform: state
+    entity_id: binary_sensor.samba_backup_running
+    id: sambab
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  - platform: state
+    entity_id: binary_sensor.samba_share_running
+    id: sambashare
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  - platform: state
+    entity_id: binary_sensor.visual_studio_code_running
+    id: vscode
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  - platform: state
+    entity_id: binary_sensor.zigbee2mqtt_running
+    id: z2m
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: hasscheck
+        sequence:
+          - service: notify.chat_privado
+            data:
+              message: Check Home Assistant Configuration has stopped
+              title: Addon Stopped
+      - conditions:
+          - condition: trigger
+            id: duckdns
+        sequence:
+          - service: notify.chat_privado
+            data:
+              message: Duck DNS has stopped
+              title: Addon Stopped
+      - conditions:
+          - condition: trigger
+            id: fileeditor
+        sequence:
+          - service: notify.chat_privado
+            data:
+              message: File Editor has stopped
+              title: Addon Stopped
+      - conditions:
+          - condition: trigger
+            id: os
+        sequence:
+          - service: notify.chat_privado
+            data:
+              message: Home Assistant Operating System has stopped
+              title: Addon Stopped
+      - conditions:
+          - condition: trigger
+            id: lets
+        sequence:
+          - service: notify.chat_privado
+            data:
+              message: Let's Encrypt has stopped
+              title: Addon Stopped
+      - conditions:
+          - condition: trigger
+            id: maria
+        sequence:
+          - service: notify.chat_privado
+            data:
+              message: MariaDB has stopped
+              title: Addon Stopped
+      - conditions:
+          - condition: trigger
+            id: mosquitto
+        sequence:
+          - service: notify.chat_privado
+            data:
+              message: Mosquitto Broker has stopped
+              title: Addon Stopped
+      - conditions:
+          - condition: trigger
+            id: sambab
+        sequence:
+          - service: notify.chat_privado
+            data:
+              message: Samba Backup has stopped
+              title: Addon Stopped
+      - conditions:
+          - condition: trigger
+            id: sambashare
+        sequence:
+          - service: notify.chat_privado
+            data:
+              message: Samba Share has stopped
+              title: Addon Stopped
+      - conditions:
+          - condition: trigger
+            id: vscode
+        sequence:
+          - service: notify.chat_privado
+            data:
+              message: Visual Studio Code has stopped
+              title: Addon Stopped
+      - conditions:
+          - condition: trigger
+            id: z2m
+        sequence:
+          - service: notify.chat_privado
+            data:
+              message: Zigbee 2 MQTT has stopped
+              title: Addon Stopped
+    default: []
+mode: single

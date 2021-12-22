@@ -1,0 +1,35 @@
+id: a3a20a59-7b56-4d43-80ea-bc315410a24c
+alias: (YAML) Basement - Door notifier
+description: Notificador de Puerta abierta y cerrada
+trigger:
+  - platform: state
+    entity_id: binary_sensor.kitchen_contact_sensor_door_to_basement_contact
+    id: abierta
+    to: 'on'
+    from: 'off'
+  - platform: state
+    entity_id: binary_sensor.kitchen_contact_sensor_door_to_basement_contact
+    id: cerrada
+    to: 'off'
+    from: 'on'
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: abierta
+        sequence:
+          - service: notify.chat_privado
+            data:
+              message: La Puerta hacia el sotano ha sido abierta
+              title: Puerta
+      - conditions:
+          - condition: trigger
+            id: cerrada
+        sequence:
+          - service: notify.chat_privado
+            data:
+              message: La Puerta hacia el sotano ha sido cerrada
+              title: Puerta
+    default: []
+mode: single

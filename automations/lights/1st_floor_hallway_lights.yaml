@@ -1,0 +1,37 @@
+id: 9b76350e-eecc-4760-819f-d2cbf26ed813
+alias: (YAML) 1st Floor Hallway Lights
+description: ''
+trigger:
+  - platform: state
+    entity_id: switch.1st_foor_hallway_top
+    id: one_button_on
+    to: 'on'
+  - platform: state
+    entity_id: switch.1st_foor_hallway_top
+    id: one_button_off
+    to: 'off'
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: one_button_on
+        sequence:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.1st_foor_hallway_bottom
+          - service: switch.turn_on
+            target:
+              entity_id: switch.1st_foor_hallway_center
+      - conditions:
+          - condition: trigger
+            id: one_button_off
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.1st_foor_hallway_bottom
+          - service: switch.turn_off
+            target:
+              entity_id: switch.1st_foor_hallway_center
+    default: []
+mode: single

@@ -1,0 +1,43 @@
+id: 8cf07045-42ba-4765-a809-8cb871fc2f08
+alias: (YAML) David Room lights
+description: ''
+trigger:
+  - platform: state
+    entity_id: switch.david_s_room_top
+    id: david_button_off
+    to: 'off'
+  - platform: state
+    entity_id: switch.david_s_room_top
+    id: david_button_on
+    to: 'on'
+  - platform: zone
+    entity_id: person.david_armando
+    id: david_left_home
+    zone: zone.home
+    event: leave
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: david_button_off
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: light.david_room_and_bathroom_lights
+      - conditions:
+          - condition: trigger
+            id: david_button_on
+        sequence:
+          - service: light.turn_on
+            target:
+              entity_id: light.david_room_and_bathroom_lights
+      - conditions:
+          - condition: trigger
+            id: david_left_home
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: light.david_room_and_bathroom_lights
+    default: []
+mode: single

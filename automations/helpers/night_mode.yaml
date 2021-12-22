@@ -1,0 +1,29 @@
+id: 604a7ba7-cfac-41da-930a-4769b524d1e6
+alias: (YAML) Deep Night Mode activation
+description: 'Esto hace que encienda un booleano cuando pasan de las 11 y no han llegado las 6'
+trigger:
+  - platform: time
+    at: '23:00:00'
+    id: encender
+  - platform: time
+    at: '06:00:00'
+    id: apagar
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: encender
+        sequence:
+          - service: input_boolean.turn_on
+            target:
+              entity_id: input_boolean.night_mode
+      - conditions:
+          - condition: trigger
+            id: apagar
+        sequence:
+          - service: input_boolean.turn_off
+            target:
+              entity_id: input_boolean.night_mode
+    default: []
+mode: single

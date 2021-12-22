@@ -1,0 +1,13 @@
+id: e8238805-1596-46b7-b617-c1dc4d606e0f
+alias: (YAML) Samba Backup - Sensor restore
+description: ''
+trigger:
+  - platform: homeassistant
+    event: start
+condition: []
+action:
+  - service: hassio.addon_stdin
+    data:
+      addon: 15d21743_samba_backup
+      input: restore-sensor
+mode: single

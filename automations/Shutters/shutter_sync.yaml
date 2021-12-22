@@ -1,0 +1,75 @@
+id: 1f54e86a-9135-494f-ac3e-c56cffc3ee3a
+alias: (YAML) Devices - Shutter sync
+description: to synchronize the physical and virtual status for all shutters
+trigger:
+  - platform: state
+    entity_id: switch.virtual_second_shutter_down
+    id: closed_2nd_floor
+    to: 'on'
+  - platform: state
+    entity_id: switch.virtual_second_shutter_up
+    id: open_2nd_floor
+    to: 'on'
+  - platform: state
+    entity_id: switch.virtual_main_shutter_button_down
+    id: closed_main
+    to: 'on'
+  - platform: state
+    entity_id: switch.virtual_main_shutter_button_up
+    id: open_main
+    to: 'on'
+  - platform: state
+    entity_id: switch.virtual_kitchen_shutter_button_down
+    id: closed_kitchen
+    to: 'on'
+  - platform: state
+    entity_id: switch.virtual_kitchen_shutter_button_up
+    id: open_kitchen
+    to: 'on'
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: closed_2nd_floor
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.virtual_second_shutter_up
+      - conditions:
+          - condition: trigger
+            id: open_2nd_floor
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.virtual_second_shutter_down
+      - conditions:
+          - condition: trigger
+            id: closed_main
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.virtual_main_shutter_button_up
+      - conditions:
+          - condition: trigger
+            id: open_main
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.virtual_main_shutter_button_down
+      - conditions:
+          - condition: trigger
+            id: closed_kitchen
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.virtual_kitchen_shutter_button_up
+      - conditions:
+          - condition: trigger
+            id: open_kitchen
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.virtual_kitchen_shutter_button_down
+    default: []
+mode: single

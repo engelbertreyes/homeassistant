@@ -1,0 +1,12 @@
+id: 23de8945-135d-4de4-8ad0-f3628cf369ff
+alias: (YAML) Home Assistant start
+description: ''
+trigger:
+  - platform: homeassistant
+    event: start
+condition: []
+action:
+  - service: notify.chat_privado
+    data:
+      message: Home Assistant ha iniciado 🎉
+mode: single

@@ -1,0 +1,16 @@
+id: 312d28a2-f843-4a5e-b46b-69651e137b98
+alias: (YAML) HA Backup
+description: ''
+trigger:
+  - platform: time
+    at: '03:00:00'
+condition:
+  - condition: time
+    weekday:
+      - sat
+action:
+  - service: hassio.addon_stdin
+    data:
+      addon: 15d21743_samba_backup
+      input: trigger
+mode: single

@@ -1,0 +1,43 @@
+id: fa964360-1ad3-4d83-bbd3-1d2901a70315
+alias: (YAML) Main Entrance - Door notification
+description: ''
+trigger:
+  - platform: state
+    entity_id: binary_sensor.contact_main_entrance_contact
+    to: 'on'
+    id: open
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 0
+  - platform: state
+    entity_id: binary_sensor.contact_main_entrance_contact
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 0
+    id: close
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: open
+        sequence:
+          - service: notify.chat_privado
+            data:
+              message: Puerta Amarilla Abierta
+              title: Puerta Principal
+      - conditions:
+          - condition: trigger
+            id: close
+        sequence:
+          - service: notify.chat_privado
+            data:
+              message: Puerta Amarilla Cerrada
+              title: Puerta Principal
+    default: []
+mode: single

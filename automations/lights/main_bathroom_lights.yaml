@@ -1,0 +1,88 @@
+id: 255e5a6b-a0d8-4308-bc3f-8c2bd0fad92f
+alias: (YAML) Main Bathroom - Automatic lights based on motion
+description: Currently set at 10 minutes irregardless of lux
+trigger:
+  - platform: state
+    entity_id: switch.main_bathroom_bottom
+    to: 'on'
+    id: lower_light
+  - platform: state
+    entity_id: switch.main_bathroom_center
+    to: 'on'
+    id: upper_light
+  - platform: state
+    entity_id: binary_sensor.motion_main_bathroom_occupancy
+    id: motion_stopped
+    to: 'off'
+  - platform: event
+    event_type: timer.finished
+    id: timer_finished
+    event_data:
+      entity_id: timer.bathroom_motion
+  - platform: state
+    entity_id: binary_sensor.motion_main_bathroom_occupancy
+    id: motion_detected
+    to: 'on'
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: lower_light
+        sequence:
+          - service: timer.start
+            target:
+              entity_id: timer.bathroom_motion
+            data:
+              duration: '0'
+      - conditions:
+          - condition: trigger
+            id: upper_light
+        sequence:
+          - service: timer.start
+            target:
+              entity_id: timer.bathroom_motion
+            data:
+              duration: '0'
+      - conditions:
+          - condition: trigger
+            id: motion_stopped
+        sequence:
+          - service: timer.start
+            target:
+              entity_id: timer.bathroom_motion
+            data:
+              duration: '0'
+      - conditions:
+          - condition: trigger
+            id: timer_finished
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id:
+                - light.bathroom_lights
+      - conditions:
+          - condition: trigger
+            id: motion_detected
+          - condition: state
+            entity_id: input_boolean.night_mode
+            state: 'on'
+        sequence:
+          - service: timer.cancel
+            target:
+              entity_id: timer.bathroom_motion
+          - service: light.turn_on
+            target:
+              entity_id: light.main_bathroom_led
+      - conditions:
+          - condition: trigger
+            id: motion_detected
+        sequence:
+          - service: timer.cancel
+            target:
+              entity_id: timer.bathroom_motion
+          - service: light.turn_on
+            target:
+              entity_id: light.bathroom_lights
+    default: []
+mode: single

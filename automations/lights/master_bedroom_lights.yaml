@@ -1,0 +1,31 @@
+id: 9f1d93ce-3f33-4fcb-a3aa-4d1317cb48df
+alias: (YAML) Master Bedroom - Lights - On/Off
+description: On/Off Main room lights based on switch
+trigger:
+  - platform: state
+    entity_id: switch.master_bedroom_right_side_top
+    from: 'off'
+    to: 'on'
+    id: switch_on
+  - platform: state
+    entity_id: switch.master_bedroom_right_side_top
+    to: 'off'
+    id: switch_off
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: switch_on
+        sequence:
+          - service: light.turn_on
+            target:
+              entity_id: light.main_room_lights
+      - conditions:
+          - condition: trigger
+            id: switch_off
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: light.main_room_lights
+mode: single
